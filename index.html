@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lab2, Varenikov Andrii</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script src="./Utils/trackball-rotator.js"></script>
+    <script src="./Utils/m4.js"></script>
+    <script src="./shader.gpu"></script>
+    <script src="./main.js"></script>
+</head>
+
+<body onload="init()">
+    <div id="canvas-holder">
+        <div class="text">
+            <h2>Made by Varenikov Andrii from TR-31mp </h2>
+            <h2>Variant 3: Sievert's Surface </h2>
+        </div>
+        <label for="lightDirectionX">lig0htDirectionX</label>
+        <input type="range" name="lightDirectionX" id="lightDirectionX" min="-5" max="5" step="0.1" value="0">
+        <label for="lightDirectionY">lightDirectionY</label>
+        <input type="range" name="lightDirectionY" id="lightDirectionY" min="-5" max="5" step="0.1" value="0">
+        <label for="lightDirectionZ">lightDirectionZ</label>
+        <input type="range" name="lightDirectionZ" id="lightDirectionZ" min="-10" max="10" step="0.05" value="10">
+        <label for="lightPositionX">lightPositionX</label>
+        <input type="range" name="lightPositionX" id="lightPositionX" min="-100" max="100" step="1" value="0">
+        <label for="lightPositionY">lightPositionY</label>
+        <input type="range" name="lightPositionY" id="lightPositionY" min="-100" max="100" step="1" value="0">
+        <label for="lightPositionZ">lightPositionZ</label>
+        <input type="range" name="lightPositionZ" id="lightPositionZ" min="-20" max="-10" step="1" value="-10"><br>
+        <label for="limit">limit</label>
+        <input type="range" name="limit" id="limit" min="0" max="5" step="0.5" value="0">
+        <label for="smoothValue">smoothValue</label>
+        <input type="range" name="smoothValue" id="smoothValue" min="0" max="100" step="1" value="0">
+        <canvas class="drawing" width="800" height="800" id="webglcanvas" style="background-color:r"></canvas>
+    </div>
+</body>
+
+</html>
