@@ -1,0 +1,47 @@
+
+
+// Vertex shader
+const vertexShaderSource = `
+attribute vec3 vertex;
+attribute vec3 normal;
+uniform mat4 ModelViewProjectionMatrix,
+NormalMatrix;
+
+uniform float u_limit;
+uniform float u_smoothValue;
+uniform vec3 u_lightDirection;
+uniform vec3 u_lightPosition;
+
+varying vec3 v_color;
+uniform vec4 color;
+void main() {
+    vec3 norm = normalize(mat3(NormalMatrix)*normal);
+    vec3 vert = mat3(ModelViewProjectionMatrix)*vertex;
+    vec3 toLight = u_lightPosition-vert;
+    vec3 toView = -vert;
+    vec3 halfVector = normalize(toLight+toView);
+    float dotFromDirection = dot(toLight,normalize(-u_lightDirection));
+    float inLight = smoothstep(u_limit,u_limit+u_smoothValue,dotFromDirection);
+    float light = inLight * dot(norm, toLight);
+    float specular = inLight * pow(dot(norm, halfVector),10.0);
+    v_color = vec3(color);
+    v_color *= light;
+    v_color += specular;
+    gl_Position = ModelViewProjectionMatrix * vec4(vertex,1.0);
+}`;
+
+
+// Fragment shader
+const fragmentShaderSource = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+   precision highp float;
+#else
+   precision mediump float;
+#endif
+
+uniform vec4 color;
+varying vec3 v_color;
+void main() {
+    //gl_FragColor = color;
+    gl_FragColor = vec4(v_color,1.0);
+}`;
